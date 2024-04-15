@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/user_service_db  # Assuming your database name is user_service_db
+    username: root  # Update with your actual database username
+    password: Syed45@sql  # Update with your actual database password
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect  # Adjust for your database dialect if needed
+        show_sql: true  # Enables basic SQL logging for debugging
+        format_sql: true  # Enhances SQL logging readability (optional)
+        enable_lazy_load_no_trans: false  # Add this line to disable lazy loading without transaction
+
+    hibernate:
+      ddl-auto: update  # Creates database tables on application startup (caution: use with care in production)
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG  # Logs detailed SQL statements during execution
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Logs parameter binding details (optional)
+
