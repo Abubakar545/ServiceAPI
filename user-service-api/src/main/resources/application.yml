@@ -1,8 +1,8 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   application:
-    name: "accounts"
+    name: "selfservice"
     profiles:
       active: "prod"
   datasource:
@@ -44,3 +44,17 @@ management:
 endpoints:
   shutdown:
     enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+info:
+  app:
+    name: "self service"
+    description: " Bank self service Application"
+    version: "1.0.0"

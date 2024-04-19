@@ -14,22 +14,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController @AllArgsConstructor
+@RequestMapping("/api/v1/users")
 public class RegistrationController {
 
     private final RegistrationService registrationService;
     private final CustomerService customerService;
 
 
-    @PostMapping("/api/v1/users/register")
+    @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationRequestDTO request, BindingResult result) {
         if (result.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder("Validation failed:\n");
@@ -51,7 +48,7 @@ public class RegistrationController {
     }
 
 
-    @GetMapping("/api/v1/users/{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<?> getCustomerByUsername(@PathVariable String username) {
         if (username == null || username.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username is required");

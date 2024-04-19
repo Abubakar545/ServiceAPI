@@ -8,9 +8,28 @@ spring:
       discovery:
         locator:
           enabled: true  # Enable service discovery
-
-
-
+          lowerCaseServiceId: true
+      routes:
+        - id: selfService-route-1
+          uri: lb://ACCOUNTS  # Load balance to the "accounts" service registered with Eureka
+          predicates:
+            - Path=/api/v1/users/**
+              # Route requests with /accounts/** path to the "accounts" service
+        - id: selfService-route-2
+          uri: lb://ACCOUNTS  # Load balance to the "accounts" service registered with Eureka
+          predicates:
+            - Path=/api/v1/customers/**
+               # Route requests with /accounts/** path to the "account
+        - id: selfService-route-3
+          uri: lb://ACCOUNTS  # Load balance to the "accounts" service registered with Eureka
+          predicates:
+            - Path=/api/v1/accounts/**
+             # Route requests with /accounts/** path to the "account
+        - id: selfService-route-4
+          uri: lb://ACCOUNTS  # Load balance to the "accounts" service registered with Eureka
+          predicates:
+            - Path=/api/v1/payments/**
+            # Route requests with /accounts/** path to the "account
 management:
   endpoints:
     web:
@@ -28,3 +47,16 @@ info:
     name: "gatewayserver"
     description: "Self Service Gateway Server Application"
     version: "1.0.0"
+
+
+server:
+  port: 8072
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "http://localhost:8070/eureka/"
