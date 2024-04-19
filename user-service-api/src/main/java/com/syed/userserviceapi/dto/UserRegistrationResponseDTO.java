@@ -9,6 +9,5 @@ public class UserRegistrationResponseDTO {
 
     private String statusCode;
     private String statusMsg;
-    private String accessToken;
-
+//    private String token;
 }

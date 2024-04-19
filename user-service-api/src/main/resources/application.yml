@@ -1,7 +1,10 @@
 server:
   port: 8080
-
 spring:
+  application:
+    name: "accounts"
+    profiles:
+      active: "prod"
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/user_service_db  # Assuming your database name is user_service_db
@@ -18,9 +21,26 @@ spring:
 
     hibernate:
       ddl-auto: update  # Creates database tables on application startup (caution: use with care in production)
+  config:
+    import: "optional:configserver:http://localhost:8071/"
 
 logging:
   level:
     org.hibernate.SQL: DEBUG  # Logs detailed SQL statements during execution
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Logs parameter binding details (optional)
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+endpoints:
+  shutdown:
+    enabled: true

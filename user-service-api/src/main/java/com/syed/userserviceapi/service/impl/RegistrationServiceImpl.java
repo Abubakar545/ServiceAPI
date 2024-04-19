@@ -34,25 +34,25 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         // Check if the username already exists
         // Check if the request and the username are not null
-        if (request != null && request.getUserName() != null && customerRepository.existsByUserName(request.getUserName())) {
+        if (request != null && request.getUsername() != null && customerRepository.existsByUsername(request.getUsername())) {
             throw new UsernameAlreadyExistsException("Username already exists");
         }
 
         // Check if the card details are already associated with another customer
-        if (cardRepository.existsByEncryptedCardNumber(request.getCardDetailsDTO().getCardNumber())) {
+        if (cardRepository.existsByEncryptedCardNumber(request.getCardDetails().getCardNumber())) {
             throw new CardDetailsAlreadyExistsException("Card details are already associated with another customer");
         }
 
         // Save customer data in the database
         Customer customer = new Customer();
-        customer.setUserName(request.getUserName());
+        customer.setName(request.getName());
+        customer.setUsername(request.getUsername());
         customer.setEmail(request.getEmail());
         customer.setPassword(request.getPassword());
-        customer.setCustomerName(request.getCustomerName());
         customerRepository.save(customer);
 
         // Save card data in the database
-        CardDetailsDTO cardDetailsDTO = request.getCardDetailsDTO();
+        CardDetailsDTO cardDetailsDTO = request.getCardDetails();
         Card card = new Card();
         card.setCustomer(customer);
         card.setEncryptedCardNumber(cardDetailsDTO.getCardNumber());
@@ -61,7 +61,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         cardRepository.save(card);
 
         // Save user details in the user directory
-        userDirectoryService.saveUser(customer.getUserName());
+        userDirectoryService.saveUser(customer.getUsername());
 
         // Create and return the registration response
         UserRegistrationResponseDTO response = new UserRegistrationResponseDTO();

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service @AllArgsConstructor
@@ -21,8 +22,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public Customer getCustomerByUserName(String userName) {
-        return customerRepository.findByUserName(userName);
+    public Optional<Customer> getCustomerByUsername(String username) {
+        return customerRepository.findByUsername(username);
     }
 
     @Override

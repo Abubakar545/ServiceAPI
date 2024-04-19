@@ -1,0 +1,6 @@
+package com.syed.securityservice.enums;
+
+public enum AuthStatus {
+
+    USER_CREATED_SUCCESSFULLY,USER_NOT_CREATED, LOGIN_SUCCESS, USERNAME_ALREADY_EXISTS,EMAIL_ALREADY_EXISTS, LOGIN_FAILED
+}

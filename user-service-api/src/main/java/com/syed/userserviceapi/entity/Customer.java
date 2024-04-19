@@ -11,11 +11,10 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "customers")
 public class Customer {
 
@@ -25,10 +24,14 @@ public class Customer {
     @Column(columnDefinition = "BINARY(16)")
     private UUID uuid;
 
+    @NotBlank(message = "Name is required")
+    @Column(name = "name")
+    private String name;
+
     @NotBlank(message = "UserName is required")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
-    @Column(name = "username", unique = true) // Ensure username uniqueness
-    private String userName;
+    @Column(unique = true) // Ensure username uniqueness
+    private String username;
 
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters long")
@@ -39,7 +42,5 @@ public class Customer {
     @Email(message = "Invalid email format")
     @Column(unique = true) // Ensure email uniqueness
     private String email;
-
-    private String customerName;
 
 }

@@ -11,10 +11,13 @@ import lombok.Data;
 @Data
 public class UserRegistrationRequestDTO {
 
+    @NotBlank(message = "Name is required")
+    private String name;
+
     @NotBlank(message = "UserName is required")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     @Column(name = "username", unique = true) // Ensure username uniqueness
-    private String userName;
+    private String username;
 
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters long")
@@ -26,18 +29,15 @@ public class UserRegistrationRequestDTO {
     @Column(unique = true) // Ensure email uniqueness
     private String email;
 
-    @NotBlank(message = "Customer name is required")
-    private String customerName;
-
     @Valid
-    private CardDetailsDTO cardDetailsDTO;
+    private CardDetailsDTO cardDetails;
 
     public boolean isValid() {
-        return userName != null && !userName.isEmpty() &&
+        return  name != null && !name.isEmpty() &&
+                username != null && !username.isEmpty() &&
                 email != null && !email.isEmpty() &&
                 password != null && !password.isEmpty() &&
-                customerName != null && !customerName.isEmpty() &&
-                cardDetailsDTO != null && cardDetailsDTO.isValid();
+                cardDetails != null && cardDetails.isValid();
     }
 
 }

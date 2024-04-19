@@ -6,6 +6,10 @@
       <list>
         <option value="$PROJECT_DIR$/user-service-api/pom.xml" />
         <option value="$PROJECT_DIR$/payment-api/pom.xml" />
+        <option value="$PROJECT_DIR$/configserver/pom.xml" />
+        <option value="$PROJECT_DIR$/eurekaserver/pom.xml" />
+        <option value="$PROJECT_DIR$/security-service/pom.xml" />
+        <option value="$PROJECT_DIR$/gatewayserver/pom.xml" />
       </list>
     </option>
   </component>

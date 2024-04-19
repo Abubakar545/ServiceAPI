@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController @AllArgsConstructor
 public class RegistrationController {
 
@@ -56,7 +58,7 @@ public class RegistrationController {
         }
 
         try {
-            Customer customer = customerService.getCustomerByUserName(username);
+            Optional<Customer> customer = customerService.getCustomerByUsername(username);
             if (customer == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found for username: " + username);
             }
