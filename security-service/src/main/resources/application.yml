@@ -34,4 +34,8 @@ eureka:
     registerWithEureka: true
     serviceUrl:
       defaultZone: http://localhost:8070/eureka/
-
+info:
+  app:
+    name: "selfservice"
+    description: " Bank Self Service Application"
+    version: "1.0.0"
