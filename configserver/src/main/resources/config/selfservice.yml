@@ -1,7 +1,7 @@
 build:
   version: "1.0"
 
-accounts:
+selfservice:
   message: "Welcome to self service related local APIs "
   contactDetails:
     name: "Syed - Developer"

@@ -11,25 +11,30 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: selfService-route-1
-          uri: lb://ACCOUNTS  # Load balance to the "accounts" service registered with Eureka
+          uri: lb://SELFSERVICE  # Load balance to the "accounts" service registered with Eureka
           predicates:
             - Path=/api/v1/users/**
               # Route requests with /accounts/** path to the "accounts" service
         - id: selfService-route-2
-          uri: lb://ACCOUNTS  # Load balance to the "accounts" service registered with Eureka
+          uri: lb://SELFSERVICE  # Load balance to the "accounts" service registered with Eureka
           predicates:
             - Path=/api/v1/customers/**
                # Route requests with /accounts/** path to the "account
         - id: selfService-route-3
-          uri: lb://ACCOUNTS  # Load balance to the "accounts" service registered with Eureka
+          uri: lb://SELFSERVICE  # Load balance to the "accounts" service registered with Eureka
           predicates:
             - Path=/api/v1/accounts/**
              # Route requests with /accounts/** path to the "account
         - id: selfService-route-4
-          uri: lb://ACCOUNTS  # Load balance to the "accounts" service registered with Eureka
+          uri: lb://SELFSERVICE  # Load balance to the "accounts" service registered with Eureka
           predicates:
             - Path=/api/v1/payments/**
             # Route requests with /accounts/** path to the "account
+
+        - id: securityservice-route
+          uri: lb://SECURITYSERVICE  # Load balance to the "security" service registered with Eureka
+          predicates:
+            - Path=/api/auth/**
 management:
   endpoints:
     web:
